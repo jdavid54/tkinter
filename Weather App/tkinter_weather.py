@@ -11,7 +11,7 @@ from datetime import datetime
 from pprint import pprint
 # to import phot from url
 from urllib.request import urlopen
-from PIL import Image, ImageTk  # sudo apt-get install python3-pil python3-pil.imagetk
+from PIL import Image, ImageTk
 
 API_Key = 'edffd1bf975a74d5d10e58c5ac8be2d3'
 #API_Key = 'c9d926a9549ae7933324ef26e13bb200'
@@ -26,7 +26,8 @@ root.resizable(False, False)
 def get_image(icon):
     print(icon)
     try:
-        URL = "https://openweathermap.org/img/w/"+icon+".png"
+        #URL = "https://openweathermap.org/img/w/"+icon+".png"      # small icons
+        URL = "https://openweathermap.org/img/wn/"+icon+"@2x.png"  # big icons
         print(URL)
         u = urlopen(URL)
         raw_data = u.read()
@@ -36,7 +37,7 @@ def get_image(icon):
 
         label = tk.Label(image=photo)
         label.image = photo
-        label.place(x=600, y=100)
+        label.place(x=700, y=150)
     except Exception as e:
         messagebox.showerror("Weather App","No weather icon found !!")
 
@@ -44,6 +45,7 @@ def get_image(icon):
 def getWeather():
     try:
         city=textfield.get()
+        
         geolocator=Nominatim(user_agent="geoapiExercises")
         location=geolocator.geocode(city)
         obj= TimezoneFinder()
@@ -102,10 +104,10 @@ Search_image=PhotoImage(file="search.png")
 myimage=Label(image=Search_image)
 myimage.place(x=20,y=20)
 
+city = 'gagny'
 textfield=tk.Entry(root,justify="center",width=17,font=("poppins",25,"bold"),bg="#404040",border=0,fg="white")
 textfield.place(x=50,y=40)
-city="gagny"
-textfield.insert(0,city)  #https://www.delftstack.com/fr/howto/python-tkinter/how-to-set-default-text-of-tkinter-entry-widget/
+textfield.insert(0,city)
 textfield.focus()
 
 
