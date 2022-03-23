@@ -33,10 +33,23 @@ def get_image(icon):
         raw_data = u.read()
         u.close()
 
+        # from github
+        URL = "https://raw.githubusercontent.com/jdavid54/tkinter/main/Weather%20App/weather_icons/"+icon+"@2x.png" 
+        print(URL)
+        u = urlopen(URL)
+        raw_data = u.read()
+        u.close()
+        
+        # read from local file
+#         file = 'weather_icons/'+icon+'@2x.png'
+#         with open(file,'rb') as f:
+#             raw_data = f.read()
+
         photo = ImageTk.PhotoImage(data=raw_data) # <-----
 
         label = tk.Label(image=photo)
         label.image = photo
+        label.config(bg="lightgrey")
         label.place(x=700, y=150)
     except Exception as e:
         messagebox.showerror("Weather App","No weather icon found !!")
